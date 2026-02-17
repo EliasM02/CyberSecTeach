@@ -1,0 +1,391 @@
+/* ============================
+   Privilege Escalation Lesson
+   ============================ */
+
+.pe-scene {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    position: relative;
+}
+
+/* === BUILDING === */
+.pe-building {
+    background: linear-gradient(180deg, #0f1729, #0b1120);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    padding: 20px;
+    position: relative;
+    overflow: hidden;
+}
+
+.pe-building::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--accent-green), var(--accent-blue), var(--accent-red));
+    opacity: 0.6;
+}
+
+.pe-building-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.pe-building-name {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+.pe-priv-badge {
+    font-size: 0.8rem;
+    font-weight: 700;
+    padding: 4px 14px;
+    border: 2px solid;
+    border-radius: 20px;
+    background: rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+}
+
+/* === FLOORS === */
+.pe-floors {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.pe-floor {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    padding: 12px 14px;
+    transition: border-color 0.3s ease;
+}
+
+.pe-floor-label {
+    display: block;
+    font-size: 0.65rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+    font-family: var(--font-mono);
+}
+
+.pe-rooms {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+/* === ROOMS === */
+.pe-room {
+    flex: 1;
+    min-width: 100px;
+    padding: 14px 10px;
+    background: linear-gradient(180deg, #1a1f30, #141826);
+    border: 2px solid rgba(255, 255, 255, 0.06);
+    border-radius: var(--radius-sm);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    position: relative;
+    transition: all 0.4s ease;
+}
+
+.pe-room-icon {
+    font-size: 1.6rem;
+}
+
+.pe-room-label {
+    font-size: 0.72rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+    text-align: center;
+}
+
+/* Room states */
+.pe-room-active {
+    border-color: var(--accent-green) !important;
+    background: linear-gradient(180deg, rgba(0, 255, 136, 0.08), rgba(0, 255, 136, 0.02)) !important;
+}
+
+.pe-room-active.pe-room-admin {
+    border-color: var(--accent-red) !important;
+    background: linear-gradient(180deg, rgba(255, 71, 87, 0.08), rgba(255, 71, 87, 0.02)) !important;
+}
+
+.pe-room-active.pe-room-user {
+    border-color: var(--accent-blue) !important;
+    background: linear-gradient(180deg, rgba(0, 180, 216, 0.08), rgba(0, 180, 216, 0.02)) !important;
+}
+
+.pe-room-visited:not(.pe-room-active) {
+    border-color: rgba(0, 255, 136, 0.2);
+    opacity: 0.7;
+}
+
+/* Attacker figure */
+.pe-attacker {
+    position: absolute;
+    top: -8px;
+    right: -4px;
+    font-size: 1.2rem;
+    filter: drop-shadow(0 0 8px rgba(0, 255, 136, 0.6));
+}
+
+.pe-lock {
+    position: absolute;
+    top: 4px;
+    right: 6px;
+    font-size: 0.9rem;
+    opacity: 0.6;
+}
+
+/* === PATH VISUAL === */
+.pe-path-visual {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 14px;
+    padding-top: 12px;
+    border-top: 1px solid var(--border-color);
+}
+
+.pe-path-hop {
+    font-size: 0.65rem;
+    font-family: var(--font-mono);
+    color: var(--accent-blue);
+    background: var(--accent-blue-dim);
+    padding: 3px 10px;
+    border-radius: 12px;
+    white-space: nowrap;
+}
+
+/* === TERMINAL === */
+.pe-terminal {
+    background: #0d1117;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    font-family: var(--font-mono);
+}
+
+.pe-terminal-header {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 12px;
+    background: rgba(255, 255, 255, 0.03);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.pe-terminal-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+}
+
+.pe-dot-red {
+    background: #ff5f57;
+}
+
+.pe-dot-yellow {
+    background: #ffbd2e;
+}
+
+.pe-dot-green {
+    background: #28ca41;
+}
+
+.pe-terminal-title {
+    margin-left: 8px;
+    font-size: 0.7rem;
+    color: var(--text-muted);
+}
+
+.pe-terminal-body {
+    padding: 12px;
+    min-height: 100px;
+    max-height: 220px;
+    overflow-y: auto;
+}
+
+.pe-terminal-line {
+    font-size: 0.73rem;
+    color: var(--accent-green);
+    line-height: 1.6;
+    white-space: pre;
+}
+
+.pe-line-command {
+    color: #8b949e;
+}
+
+.pe-line-info {
+    color: var(--text-secondary);
+}
+
+.pe-line-header {
+    color: var(--accent-blue);
+    font-weight: 600;
+}
+
+.pe-line-open {
+    color: var(--accent-green);
+}
+
+.pe-line-blocked {
+    color: var(--accent-red);
+    opacity: 0.8;
+}
+
+.pe-line-stolen {
+    color: #ffc107;
+    font-weight: 600;
+}
+
+.pe-line-highlight {
+    color: var(--accent-green);
+    font-weight: 700;
+}
+
+.pe-cursor {
+    animation: peBlink 1s step-end infinite;
+    color: var(--accent-green);
+}
+
+@keyframes peBlink {
+    50% {
+        opacity: 0;
+    }
+}
+
+/* === CONTROLS === */
+.pe-controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 60px;
+    gap: 16px;
+}
+
+.pe-btn {
+    padding: 12px 28px;
+    border-radius: var(--radius-sm);
+    font-size: 0.9rem;
+    font-weight: 600;
+    transition: all 0.2s ease;
+    cursor: pointer;
+    border: none;
+}
+
+.pe-btn-primary {
+    background: var(--accent-green);
+    color: var(--bg-primary);
+}
+
+.pe-btn-primary:hover {
+    box-shadow: var(--shadow-glow-green);
+}
+
+.pe-btn-lateral {
+    background: var(--accent-blue);
+    color: var(--bg-primary);
+}
+
+.pe-btn-lateral:hover {
+    box-shadow: var(--shadow-glow-blue);
+}
+
+.pe-btn-danger {
+    background: var(--accent-red);
+    color: #fff;
+}
+
+.pe-btn-danger:hover {
+    box-shadow: var(--shadow-glow-red);
+}
+
+.pe-btn-safe {
+    background: var(--accent-green);
+    color: var(--bg-primary);
+}
+
+.pe-btn-safe:hover {
+    box-shadow: var(--shadow-glow-green);
+}
+
+.pe-btn-secondary {
+    background: var(--bg-card);
+    color: var(--text-primary);
+    border: 1px solid var(--border-color);
+}
+
+.pe-btn-secondary:hover {
+    border-color: var(--accent-green);
+}
+
+.pe-btn-group {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+}
+
+.pe-pwned-msg {
+    width: 100%;
+    text-align: center;
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--accent-red);
+    padding: 10px;
+    background: var(--accent-red-dim);
+    border-radius: var(--radius-sm);
+    animation: pwnPulse 2s ease infinite;
+}
+
+@keyframes pwnPulse {
+
+    0%,
+    100% {
+        box-shadow: 0 0 10px rgba(255, 71, 87, 0.2);
+    }
+
+    50% {
+        box-shadow: 0 0 25px rgba(255, 71, 87, 0.5);
+    }
+}
+
+/* === RESPONSIVE === */
+@media (max-width: 640px) {
+    .pe-rooms {
+        flex-direction: column;
+    }
+
+    .pe-room {
+        min-width: unset;
+    }
+
+    .pe-building-header {
+        flex-direction: column;
+        gap: 8px;
+        align-items: flex-start;
+    }
+
+    .pe-btn {
+        font-size: 0.8rem;
+        padding: 10px 20px;
+    }
+}

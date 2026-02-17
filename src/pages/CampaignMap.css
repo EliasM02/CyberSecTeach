@@ -1,0 +1,473 @@
+/* ============================
+   Campaign Map — Kill Chain Timeline
+   ============================ */
+
+.cm-page {
+    min-height: 100vh;
+    padding-top: 80px;
+    padding-bottom: 60px;
+}
+
+/* === CAMPAIGN TABS === */
+.cm-tabs {
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 20px 20px 0;
+    display: flex;
+    gap: 8px;
+}
+
+.cm-tab {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 12px 16px;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md) var(--radius-md) 0 0;
+    background: var(--bg-card);
+    color: var(--text-muted);
+    font-size: 0.78rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    border-bottom: 2px solid transparent;
+}
+
+.cm-tab:hover {
+    background: var(--bg-card-hover);
+    color: var(--text-primary);
+}
+
+.cm-tab-active {
+    border-bottom-color: var(--tab-color);
+    color: var(--text-primary);
+    background: var(--bg-secondary);
+}
+
+.cm-tab-icon {
+    font-size: 1.1rem;
+}
+
+.cm-tab-label {
+    white-space: nowrap;
+}
+
+.cm-tab-done {
+    font-size: 0.8rem;
+}
+
+/* === HEADER === */
+.cm-header {
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 40px 20px 20px;
+}
+
+.cm-back {
+    display: inline-block;
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    text-decoration: none;
+    margin-bottom: 20px;
+    transition: color 0.2s;
+}
+
+.cm-back:hover {
+    color: var(--accent-green);
+}
+
+.cm-header-content {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 20px;
+}
+
+.cm-icon {
+    font-size: 2.8rem;
+}
+
+.cm-title {
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--text-primary);
+    line-height: 1.2;
+}
+
+.cm-subtitle {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    margin-top: 4px;
+}
+
+/* Progress */
+.cm-progress-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.cm-progress-bar {
+    flex: 1;
+    height: 6px;
+    background: var(--bg-secondary);
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+.cm-progress-fill {
+    height: 100%;
+    border-radius: 3px;
+}
+
+.cm-progress-label {
+    font-size: 0.72rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    font-family: var(--font-mono);
+    white-space: nowrap;
+}
+
+/* === TIMELINE === */
+.cm-timeline {
+    max-width: 420px;
+    margin: 30px auto 0;
+    padding: 0 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.cm-mission-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+/* Connector */
+.cm-connector {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 48px;
+    position: relative;
+}
+
+.cm-connector-line {
+    width: 2px;
+    flex: 1;
+    background: var(--border-color);
+    transition: background 0.4s;
+}
+
+.cm-connector-active .cm-connector-line {
+    background: var(--campaign-color, #ff4757);
+}
+
+.cm-connector-arrow {
+    font-size: 0.6rem;
+    color: var(--border-color);
+    transition: color 0.4s;
+}
+
+.cm-connector-active .cm-connector-arrow {
+    color: var(--campaign-color, #ff4757);
+}
+
+/* === NODE === */
+.cm-node {
+    width: 100%;
+    padding: 20px 24px;
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--border-color);
+    background: var(--bg-card);
+    cursor: pointer;
+    text-align: left;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.cm-node:disabled {
+    cursor: not-allowed;
+}
+
+.cm-node-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.cm-node-phase {
+    font-size: 0.65rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--text-muted);
+}
+
+.cm-node-check,
+.cm-node-lock {
+    font-size: 1rem;
+}
+
+.cm-node-icon {
+    font-size: 2rem;
+    margin-bottom: 8px;
+}
+
+.cm-node-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 4px;
+}
+
+.cm-node-desc {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    line-height: 1.5;
+}
+
+.cm-node-cta {
+    display: inline-block;
+    margin-top: 12px;
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: var(--campaign-color, #ff4757);
+    animation: cmPulse 2s ease infinite;
+}
+
+@keyframes cmPulse {
+
+    0%,
+    100% {
+        opacity: 0.7;
+    }
+
+    50% {
+        opacity: 1;
+    }
+}
+
+.cm-node-status {
+    display: inline-block;
+    margin-top: 10px;
+    font-size: 0.72rem;
+    font-weight: 600;
+    color: var(--accent-green);
+}
+
+/* Node states */
+.cm-node-done {
+    border-color: rgba(0, 255, 136, 0.3);
+    background: rgba(0, 255, 136, 0.03);
+}
+
+.cm-node-active {
+    border-color: rgba(255, 71, 87, 0.4);
+    box-shadow: 0 0 20px rgba(255, 71, 87, 0.1), 0 4px 20px rgba(0, 0, 0, 0.3);
+    animation: cmNodeGlow 3s ease infinite;
+}
+
+@keyframes cmNodeGlow {
+
+    0%,
+    100% {
+        box-shadow: 0 0 15px rgba(255, 71, 87, 0.08), 0 4px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    50% {
+        box-shadow: 0 0 30px rgba(255, 71, 87, 0.2), 0 4px 20px rgba(0, 0, 0, 0.3);
+    }
+}
+
+.cm-node-unlocked {
+    border-color: var(--border-color);
+}
+
+.cm-node-unlocked:hover {
+    border-color: rgba(255, 71, 87, 0.3);
+    background: var(--bg-card-hover);
+}
+
+.cm-node-locked {
+    opacity: 0.35;
+    filter: grayscale(0.6);
+}
+
+/* === BRIEFING MODAL === */
+.cm-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(6px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    padding: 20px;
+}
+
+.cm-briefing {
+    width: 100%;
+    max-width: 440px;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    padding: 28px;
+    text-align: center;
+}
+
+.cm-briefing-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+}
+
+.cm-briefing-phase {
+    font-size: 0.65rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #ff4757;
+    background: rgba(255, 71, 87, 0.1);
+    padding: 4px 10px;
+    border-radius: 4px;
+}
+
+.cm-briefing-close {
+    background: none;
+    border: none;
+    font-size: 1.1rem;
+    color: var(--text-muted);
+    cursor: pointer;
+    padding: 4px;
+}
+
+.cm-briefing-close:hover {
+    color: var(--text-primary);
+}
+
+.cm-briefing-icon {
+    font-size: 3rem;
+    margin-bottom: 10px;
+}
+
+.cm-briefing-title {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 16px;
+}
+
+.cm-briefing-text {
+    text-align: left;
+    background: rgba(255, 71, 87, 0.04);
+    border: 1px solid rgba(255, 71, 87, 0.15);
+    border-radius: var(--radius-md);
+    padding: 14px 16px;
+    margin-bottom: 20px;
+}
+
+.cm-briefing-label {
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: #ff4757;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 6px;
+}
+
+.cm-briefing-text p {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+}
+
+.cm-briefing-go {
+    display: inline-block;
+    padding: 12px 32px;
+    border: none;
+    border-radius: var(--radius-sm);
+    background: linear-gradient(135deg, #ff4757, #ff6b81);
+    color: #fff;
+    font-size: 0.9rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.cm-briefing-go:hover {
+    box-shadow: 0 0 20px rgba(255, 71, 87, 0.4);
+    transform: translateY(-1px);
+}
+
+.cm-briefing-done {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--accent-green);
+}
+
+/* === CAMPAIGN COMPLETE === */
+.cm-complete {
+    max-width: 500px;
+    margin: 40px auto 0;
+    padding: 32px;
+    text-align: center;
+    background: var(--bg-card);
+    border-radius: var(--radius-lg);
+}
+
+.cm-complete-icon {
+    font-size: 3rem;
+    margin-bottom: 10px;
+}
+
+.cm-complete-title {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--text-primary);
+    margin-bottom: 8px;
+}
+
+.cm-complete-text {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin-bottom: 16px;
+}
+
+.cm-complete-badge {
+    display: inline-block;
+    padding: 8px 20px;
+    border-radius: 20px;
+    background: rgba(255, 71, 87, 0.1);
+    border: 1px solid rgba(255, 71, 87, 0.3);
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: #ff4757;
+}
+
+/* === RESPONSIVE === */
+@media (max-width: 640px) {
+    .cm-header {
+        padding: 30px 16px 16px;
+    }
+
+    .cm-title {
+        font-size: 1.5rem;
+    }
+
+    .cm-timeline {
+        padding: 0 16px;
+    }
+
+    .cm-node {
+        padding: 16px 18px;
+    }
+}

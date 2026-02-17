@@ -1,0 +1,227 @@
+/* ============================
+   Global Terminal — Site-wide CLI
+   ============================ */
+
+/* === TOGGLE BUTTON === */
+.gt-toggle {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    border: 1px solid var(--border-color);
+    background: var(--bg-card);
+    color: var(--accent-green);
+    font-family: var(--font-mono);
+    font-size: 0.95rem;
+    font-weight: 700;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 999;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+    transition: all 0.2s;
+}
+
+.gt-toggle:hover {
+    background: var(--accent-green);
+    color: #0b0e17;
+    box-shadow: 0 0 20px rgba(0, 255, 136, 0.3);
+}
+
+/* === OVERLAY === */
+.gt-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.55);
+    backdrop-filter: blur(4px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1001;
+    padding: 20px;
+}
+
+/* === WINDOW === */
+.gt-window {
+    width: 100%;
+    max-width: 680px;
+    max-height: 80vh;
+    background: #0b0e17;
+    border: 1px solid #1a2332;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    box-shadow:
+        0 0 60px rgba(0, 255, 136, 0.06),
+        0 20px 60px rgba(0, 0, 0, 0.6);
+}
+
+/* === HEADER === */
+.gt-header {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 10px 14px;
+    background: #111827;
+    border-bottom: 1px solid #1a2332;
+    user-select: none;
+}
+
+.gt-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: opacity 0.2s;
+}
+
+.gt-dot:hover {
+    opacity: 0.7;
+}
+
+.gt-dot-red {
+    background: #ff5f57;
+}
+
+.gt-dot-yellow {
+    background: #febc2e;
+}
+
+.gt-dot-green {
+    background: #28c840;
+}
+
+.gt-title {
+    margin-left: 8px;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    flex: 1;
+}
+
+.gt-shortcut {
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    color: #4a5568;
+    padding: 2px 8px;
+    border: 1px solid #1a2332;
+    border-radius: 4px;
+}
+
+/* === BODY === */
+.gt-body {
+    flex: 1;
+    padding: 14px;
+    overflow-y: auto;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    line-height: 1.8;
+    min-height: 250px;
+    max-height: 60vh;
+    cursor: text;
+}
+
+/* Line types */
+.gt-line {
+    white-space: pre-wrap;
+    word-break: break-all;
+}
+
+.gt-line-command {
+    color: #00ff88;
+    font-weight: 600;
+}
+
+.gt-line-info {
+    color: #8892b0;
+}
+
+.gt-line-header {
+    color: var(--text-primary);
+    font-weight: 700;
+}
+
+.gt-line-success {
+    color: var(--accent-green);
+}
+
+.gt-line-error {
+    color: #ff4757;
+}
+
+.gt-line-warning {
+    color: #feca57;
+}
+
+.gt-line-accent {
+    color: #a855f7;
+}
+
+/* === INPUT === */
+.gt-input-line {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding-top: 4px;
+}
+
+.gt-prompt {
+    color: var(--accent-green);
+    font-weight: 700;
+    flex-shrink: 0;
+}
+
+.gt-input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    outline: none;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--text-primary);
+    caret-color: var(--accent-green);
+}
+
+.gt-input::placeholder {
+    color: #2d3748;
+}
+
+/* === SCROLLBAR === */
+.gt-body::-webkit-scrollbar {
+    width: 4px;
+}
+
+.gt-body::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.gt-body::-webkit-scrollbar-thumb {
+    background: #1a2332;
+    border-radius: 2px;
+}
+
+/* === RESPONSIVE === */
+@media (max-width: 640px) {
+    .gt-window {
+        max-width: 100%;
+        margin: 0 8px;
+    }
+
+    .gt-body {
+        font-size: 0.65rem;
+        padding: 10px;
+    }
+
+    .gt-toggle {
+        bottom: 12px;
+        right: 12px;
+        width: 42px;
+        height: 42px;
+        font-size: 0.85rem;
+    }
+}

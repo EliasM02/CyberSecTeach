@@ -94,6 +94,72 @@ const lessons = [
         color: 'purple',
         category: 'attacks',
     },
+    {
+        to: '/lesson/xss',
+        icon: '💉',
+        title: 'Cross-Site Scripting',
+        description:
+            'Inject JavaScript into a guestbook — steal cookies, redirect visitors, and deface the page.',
+        difficulty: 'Medium',
+        tags: ['web', 'injection', 'XSS', 'OWASP'],
+        color: 'red',
+        category: 'attacks',
+    },
+    {
+        to: '/lesson/privesc',
+        icon: '🏢',
+        title: 'Privilege Escalation',
+        description:
+            'From guest to admin — see how attackers sneak through a building and find the master key.',
+        difficulty: 'Hard',
+        tags: ['lateral movement', 'escalation', 'post-exploitation'],
+        color: 'red',
+        category: 'attacks',
+    },
+    {
+        to: '/lesson/gobuster',
+        icon: '🔍',
+        title: 'GoBuster',
+        description:
+            'Find hidden directories and files by scanning every corridor in the building.',
+        difficulty: 'Medium',
+        tags: ['enumeration', 'directories', 'recon'],
+        color: 'blue',
+        category: 'tools',
+    },
+    {
+        to: '/lesson/shells',
+        icon: '📞',
+        title: 'Reverse Shell',
+        description:
+            'The phone call from inside — how a hacked server calls back to the attacker.',
+        difficulty: 'Hard',
+        tags: ['shells', 'remote access', 'post-exploitation'],
+        color: 'red',
+        category: 'tools',
+    },
+    {
+        to: '/lesson/burp',
+        icon: '✉️',
+        title: 'Burp Suite',
+        description:
+            'The intercepting courier — open, read, and modify web requests before they arrive.',
+        difficulty: 'Medium',
+        tags: ['proxy', 'HTTP', 'web testing'],
+        color: 'purple',
+        category: 'tools',
+    },
+    {
+        to: '/lesson/john',
+        icon: '🔨',
+        title: 'John the Ripper',
+        description:
+            'Crack password hashes using the rockyou.txt wordlist — the pentester\'s favourite tool.',
+        difficulty: 'Medium',
+        tags: ['password', 'hash cracking', 'wordlist'],
+        color: 'orange',
+        category: 'tools',
+    },
 
     // ── Social Engineering ──────────────────────────────────
     {
@@ -107,13 +173,73 @@ const lessons = [
         color: 'blue',
         category: 'social-engineering',
     },
+
+    // ── Cryptography ────────────────────────────────────────
+    {
+        to: '/lesson/crypto',
+        icon: '🔐',
+        title: 'Cryptography',
+        description:
+            'Crack hashed passwords with a rainbow table — and learn why salting saves the day.',
+        difficulty: 'Medium',
+        tags: ['hashing', 'encryption', 'passwords', 'rainbow-table'],
+        color: 'yellow',
+        category: 'attacks',
+    },
+    {
+        to: '/lesson/steganography',
+        icon: '🖼️',
+        title: 'Steganography',
+        description:
+            'Find hidden messages inside innocent-looking images — secrets hiding in plain sight.',
+        difficulty: 'Medium',
+        tags: ['forensics', 'steganography', 'CTF'],
+        color: 'teal',
+        category: 'attacks',
+    },
+    {
+        to: '/lesson/malware',
+        icon: '🦠',
+        title: 'Malware Analysis',
+        description:
+            'Dissect a virus in a sandbox — static analysis, dynamic detonation, and IOC extraction.',
+        difficulty: 'Hard',
+        tags: ['malware', 'forensics', 'reverse-engineering'],
+        color: 'red',
+        category: 'attacks',
+    },
+
+    // ── Defense ──────────────────────────────────────────────
+    {
+        to: '/lesson/firewall',
+        icon: '🛡️',
+        title: 'Firewall Logic',
+        description:
+            'Be the bouncer — set rules, watch packets arrive, and decide who gets in and who gets blocked.',
+        difficulty: 'Easy',
+        tags: ['defense', 'firewall', 'blue-team'],
+        color: 'blue',
+        category: 'defense',
+    },
+    {
+        to: '/lesson/log-analysis',
+        icon: '🕵️',
+        title: 'Log Analysis',
+        description:
+            'Read the server\'s diary — hunt through log entries to find port scans, brute-force attacks, and reverse shells.',
+        difficulty: 'Easy',
+        tags: ['defense', 'logs', 'blue-team', 'soc'],
+        color: 'purple',
+        category: 'defense',
+    },
 ]
 
 export const categories = [
     { id: 'reconnaissance', label: '🔍 Reconnaissance', description: 'Mapping and discovering targets' },
     { id: 'attacks', label: '⚔️ Attacks', description: 'How attackers exploit vulnerabilities' },
+    { id: 'tools', label: '🛠️ Toolkit', description: 'Essential tools for every hacker' },
     { id: 'social-engineering', label: '🎭 Social Engineering', description: 'Hacking the human mind' },
-    // { id: 'defense', label: '🛡️ Defense', description: 'How to protect yourself' },  // future
+    { id: 'defense', label: '🛡️ Defense', description: 'How to protect and defend systems' },
 ]
 
 export function getLessonsByCategory() {

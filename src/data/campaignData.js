@@ -1,0 +1,101 @@
+// Campaign definitions — each campaign is a sequence of existing lessons
+// that form a cohesive attack narrative.
+
+const campaigns = [
+    {
+        id: 'corporate-breach',
+        title: 'The Corporate Breach',
+        subtitle: 'Execute a full attack chain against a fictional corporation',
+        icon: '🏢',
+        color: '#ff4757',
+        xpBonus: 500,
+        badge: { id: 'apt-actor', label: '🎯 APT Actor', description: 'Complete a full attack chain campaign' },
+        missions: [
+            {
+                id: 'recon',
+                phase: 'Reconnaissance',
+                title: 'Find the Open Door',
+                description: 'Use Nmap to scan the target and discover open ports.',
+                lessonPath: '/lesson/nmap',
+                icon: '🔍',
+                briefing: 'Your team has been hired to test the security of MegaCorp Inc. Your first task: find what services are exposed to the internet.',
+            },
+            {
+                id: 'initial-access',
+                phase: 'Initial Access',
+                title: 'Steal the Credentials',
+                description: 'Craft a phishing email to trick an employee into revealing their password.',
+                lessonPath: '/lesson/phishing',
+                icon: '🎣',
+                briefing: 'You found a web server and an email server. Time to target the humans. Craft a phishing email to the IT department.',
+            },
+            {
+                id: 'persistence',
+                phase: 'Persistence',
+                title: 'Establish a Backdoor',
+                description: 'Set up a reverse shell so you can come back anytime.',
+                lessonPath: '/lesson/shells',
+                icon: '📞',
+                briefing: 'You\'re in! But the employee might change their password. Set up a reverse shell so you have permanent access.',
+            },
+            {
+                id: 'escalation',
+                phase: 'Privilege Escalation',
+                title: 'Become Admin',
+                description: 'Escalate from a regular user to full administrator access.',
+                lessonPath: '/lesson/privesc',
+                icon: '🔓',
+                briefing: 'You have access as a low-level user. Now find misconfigurations to escalate to domain admin.',
+            },
+            {
+                id: 'impact',
+                phase: 'Impact',
+                title: 'Encrypt Everything',
+                description: 'Deploy ransomware to encrypt critical business data.',
+                lessonPath: '/lesson/ransomware',
+                icon: '💣',
+                briefing: 'You are now admin. This is the final stage — demonstrate the impact by deploying ransomware on the file server.',
+            },
+        ],
+    },
+    {
+        id: 'securing-the-breach',
+        title: 'Securing the Breach',
+        subtitle: 'Replay the Corporate Breach — but this time YOU are the defender',
+        icon: '🛡️',
+        color: '#a855f7',
+        xpBonus: 500,
+        badge: { id: 'guardian', label: '🛡️ Guardian', description: 'Complete the defensive campaign' },
+        missions: [
+            {
+                id: 'block-the-scan',
+                phase: 'Perimeter Defense',
+                title: 'Block the Scan',
+                description: 'Configure the firewall to stop the attacker\'s port scan before they map your network.',
+                lessonPath: '/lesson/firewall',
+                icon: '🧱',
+                briefing: 'ALERT: The SOC has detected a port scan from 45.33.32.156. Your mission: configure the firewall rules to block the scan while keeping legitimate traffic flowing.',
+            },
+            {
+                id: 'detect-the-intrusion',
+                phase: 'Detection',
+                title: 'Find the Intruder',
+                description: 'Analyze server logs to spot the attacker\'s footprints — port scans, brute-force, and the reverse shell.',
+                lessonPath: '/lesson/log-analysis',
+                icon: '🔍',
+                briefing: 'Despite your firewall, the attacker found a way in through an allowed port. Your mission: hunt through the logs to identify every trace of the intrusion before they do more damage.',
+            },
+            {
+                id: 'know-the-enemy',
+                phase: 'Awareness',
+                title: 'Stop the Phish',
+                description: 'Study phishing techniques so you can train employees to recognize and report suspicious emails.',
+                lessonPath: '/lesson/phishing',
+                icon: '🎣',
+                briefing: 'The post-incident review revealed the attacker got in via a phishing email. Your final mission: understand the anatomy of a phishing attack so you can build employee awareness training.',
+            },
+        ],
+    },
+]
+
+export default campaigns

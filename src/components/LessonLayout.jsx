@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
+import QuizPanel from './QuizPanel'
 import styles from './LessonLayout.module.css'
 
 export default function LessonLayout({ title, subtitle, sidebar, children }) {
@@ -36,6 +37,7 @@ export default function LessonLayout({ title, subtitle, sidebar, children }) {
                 <div className={styles.lessonArea}>
                     <div className={styles.animationPanel}>
                         {children}
+                        <QuizPanel />
                     </div>
                     <div className={styles.sidePanel}>
                         {sidebar}
@@ -45,3 +47,4 @@ export default function LessonLayout({ title, subtitle, sidebar, children }) {
         </motion.div>
     )
 }
+

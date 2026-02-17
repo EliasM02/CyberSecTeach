@@ -125,6 +125,19 @@
     transform: translateX(4px);
 }
 
+/* Completed lesson */
+.cardDone {
+    border-color: rgba(0, 255, 136, 0.25);
+}
+
+.doneBadge {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    font-size: 1.1rem;
+    z-index: 2;
+}
+
 @media (max-width: 640px) {
     .card {
         padding: 24px;

@@ -1,0 +1,346 @@
+/* ============================
+   Log Analysis Lesson — "The Detective"
+   ============================ */
+
+.log-scene {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    position: relative;
+}
+
+/* === LOG VIEWER === */
+.log-viewer {
+    background: #0b0e17;
+    border: 1px solid #1a2332;
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+}
+
+.log-viewer-header {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 12px;
+    background: #111827;
+    border-bottom: 1px solid #1a2332;
+}
+
+.log-viewer-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+}
+
+.log-dot-red {
+    background: #ff5f57;
+}
+
+.log-dot-yellow {
+    background: #febc2e;
+}
+
+.log-dot-green {
+    background: #28c840;
+}
+
+.log-viewer-title {
+    margin-left: 8px;
+    color: #4a5568;
+    font-size: 0.65rem;
+}
+
+.log-viewer-body {
+    padding: 8px 0;
+    max-height: 380px;
+    overflow-y: auto;
+}
+
+/* === LOG ENTRIES === */
+.log-entry {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 5px 14px;
+    color: #8892b0;
+    border-left: 3px solid transparent;
+    transition: all 0.2s ease;
+    position: relative;
+}
+
+.log-entry-clickable {
+    cursor: pointer;
+}
+
+.log-entry-clickable:hover {
+    background: rgba(255, 255, 255, 0.03);
+}
+
+.log-entry-correct {
+    background: rgba(255, 71, 87, 0.06);
+    border-left-color: #ff4757;
+    color: #ff6b81;
+}
+
+.log-entry-wrong {
+    background: rgba(255, 200, 50, 0.06);
+    border-left-color: #feca57;
+}
+
+.log-entry-missed {
+    background: rgba(255, 165, 0, 0.06);
+    border-left-color: #ffa500;
+    color: #ffa500;
+}
+
+.log-entry-false {
+    background: rgba(255, 200, 50, 0.06);
+    border-left-color: #feca57;
+}
+
+.log-time {
+    color: #4a5568;
+    min-width: 60px;
+}
+
+.log-src {
+    color: var(--accent-blue);
+    min-width: 100px;
+    font-weight: 600;
+}
+
+.log-event {
+    flex: 1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.log-flag {
+    font-size: 0.9rem;
+    flex-shrink: 0;
+}
+
+.log-flag-missed {
+    opacity: 0.7;
+}
+
+/* === REASONING === */
+.log-reasoning {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    padding: 14px 16px;
+    overflow: hidden;
+}
+
+.log-reasoning-title {
+    font-weight: 700;
+    font-size: 0.82rem;
+    color: var(--text-primary);
+    margin-bottom: 10px;
+}
+
+.log-finding {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    padding: 6px 0;
+    border-bottom: 1px solid var(--border-color);
+    font-size: 0.75rem;
+}
+
+.log-finding:last-child {
+    border-bottom: none;
+}
+
+.log-finding-icon {
+    flex-shrink: 0;
+    font-size: 0.85rem;
+}
+
+.log-finding-correct .log-finding-text {
+    color: #ff6b81;
+}
+
+.log-finding-false .log-finding-text {
+    color: #feca57;
+}
+
+/* === SCORE CARD === */
+.log-score {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    padding: 24px;
+    text-align: center;
+}
+
+.log-score-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 16px;
+}
+
+.log-score-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin-bottom: 16px;
+}
+
+.log-score-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    padding: 12px 8px;
+    border-radius: var(--radius-md);
+    background: var(--bg-secondary);
+}
+
+.log-score-num {
+    font-size: 1.6rem;
+    font-weight: 800;
+    font-family: var(--font-mono);
+}
+
+.log-score-label {
+    font-size: 0.6rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.log-score-good .log-score-num {
+    color: var(--accent-green);
+}
+
+.log-score-total .log-score-num {
+    color: var(--accent-blue);
+}
+
+.log-score-bad .log-score-num {
+    color: #feca57;
+}
+
+.log-score-missed .log-score-num {
+    color: #ff4757;
+}
+
+.log-missed-list {
+    text-align: left;
+    margin-top: 12px;
+    padding: 12px;
+    background: rgba(255, 71, 87, 0.04);
+    border: 1px solid rgba(255, 71, 87, 0.15);
+    border-radius: var(--radius-md);
+}
+
+.log-missed-title {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: #ff4757;
+    margin-bottom: 6px;
+}
+
+.log-missed-item {
+    font-size: 0.72rem;
+    color: var(--text-secondary);
+    padding: 3px 0;
+    border-bottom: 1px solid rgba(255, 71, 87, 0.08);
+}
+
+.log-missed-item:last-child {
+    border-bottom: none;
+}
+
+/* === CONTROLS === */
+.log-controls {
+    display: flex;
+    justify-content: center;
+    padding: 8px 0;
+}
+
+.log-btn {
+    padding: 12px 28px;
+    border: none;
+    border-radius: var(--radius-sm);
+    font-weight: 700;
+    font-size: 0.88rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.log-btn-start {
+    background: linear-gradient(135deg, #a855f7, #6366f1);
+    color: #fff;
+}
+
+.log-btn-start:hover {
+    box-shadow: 0 0 20px rgba(168, 85, 247, 0.4);
+}
+
+.log-btn-submit {
+    background: linear-gradient(135deg, #ff4757, #ff6b81);
+    color: #fff;
+    padding: 10px 20px;
+    font-size: 0.82rem;
+}
+
+.log-btn-submit:hover {
+    box-shadow: 0 0 20px rgba(255, 71, 87, 0.4);
+}
+
+.log-btn-reset {
+    background: transparent;
+    border: 1px solid var(--border-color);
+    color: var(--text-secondary);
+    font-size: 0.82rem;
+}
+
+.log-btn-reset:hover {
+    border-color: #a855f7;
+    color: #a855f7;
+}
+
+.log-hunting-bar {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.log-hunt-count {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+    font-family: var(--font-mono);
+}
+
+/* === RESPONSIVE === */
+@media (max-width: 640px) {
+    .log-entry {
+        font-size: 0.6rem;
+        gap: 6px;
+        padding: 4px 10px;
+    }
+
+    .log-src {
+        min-width: 80px;
+    }
+
+    .log-score-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .log-hunting-bar {
+        flex-direction: column;
+        gap: 10px;
+    }
+}

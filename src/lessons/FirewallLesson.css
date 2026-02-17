@@ -1,0 +1,455 @@
+/* ============================
+   Firewall Lesson — "The Bouncer"
+   ============================ */
+
+.fw-scene {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    position: relative;
+}
+
+/* === RULES PANEL === */
+.fw-rules-panel {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    padding: 18px;
+}
+
+.fw-rules-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 14px;
+}
+
+.fw-rules-icon {
+    font-size: 1.2rem;
+}
+
+.fw-rules-title {
+    font-weight: 700;
+    font-size: 0.9rem;
+    color: var(--text-primary);
+}
+
+.fw-rules-hint {
+    margin-left: auto;
+    font-size: 0.65rem;
+    font-family: var(--font-mono);
+    color: var(--text-muted);
+    background: rgba(0, 255, 136, 0.08);
+    padding: 2px 8px;
+    border-radius: 4px;
+}
+
+.fw-rules-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.fw-rule {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 10px 14px;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border-color);
+    background: var(--bg-secondary);
+    cursor: pointer;
+    text-align: left;
+    transition: all 0.25s ease;
+}
+
+.fw-rule:disabled {
+    cursor: default;
+    opacity: 0.7;
+}
+
+.fw-rule-allow {
+    border-color: rgba(0, 255, 136, 0.2);
+    background: rgba(0, 255, 136, 0.03);
+}
+
+.fw-rule-deny {
+    border-color: rgba(255, 71, 87, 0.2);
+    background: rgba(255, 71, 87, 0.03);
+}
+
+.fw-rule-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.fw-rule-port {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+.fw-rule-action {
+    font-size: 0.65rem;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 4px;
+    text-transform: uppercase;
+}
+
+.fw-rule-action.allow {
+    color: var(--accent-green);
+    background: rgba(0, 255, 136, 0.1);
+}
+
+.fw-rule-action.deny {
+    color: #ff4757;
+    background: rgba(255, 71, 87, 0.1);
+}
+
+.fw-rule-bottom {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.fw-rule-service {
+    font-size: 0.72rem;
+    font-weight: 600;
+    color: var(--accent-blue);
+}
+
+.fw-rule-desc {
+    font-size: 0.68rem;
+    color: var(--text-muted);
+}
+
+/* === WALL VISUALIZATION === */
+.fw-wall-container {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 20px 10px;
+    position: relative;
+}
+
+.fw-internet-label,
+.fw-server-label {
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--text-muted);
+    white-space: nowrap;
+    text-align: center;
+    min-width: 60px;
+}
+
+.fw-wall-scene {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    position: relative;
+    height: 80px;
+    overflow: hidden;
+}
+
+.fw-packets-lane {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    justify-content: center;
+}
+
+.fw-packet {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 3px 10px;
+    border-radius: 4px;
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    font-weight: 700;
+    position: absolute;
+    white-space: nowrap;
+}
+
+.fw-packet-allow {
+    background: rgba(0, 255, 136, 0.12);
+    border: 1px solid rgba(0, 255, 136, 0.3);
+    color: var(--accent-green);
+}
+
+.fw-packet-deny {
+    background: rgba(255, 71, 87, 0.12);
+    border: 1px solid rgba(255, 71, 87, 0.3);
+    color: #ff4757;
+}
+
+/* Stagger packets vertically */
+.fw-packet:nth-child(1) {
+    top: 5px;
+}
+
+.fw-packet:nth-child(2) {
+    top: 20px;
+}
+
+.fw-packet:nth-child(3) {
+    top: 35px;
+}
+
+.fw-packet:nth-child(4) {
+    top: 50px;
+}
+
+.fw-packet:nth-child(5) {
+    top: 15px;
+}
+
+.fw-packet:nth-child(6) {
+    top: 55px;
+}
+
+.fw-packet-label {
+    font-size: 0.65rem;
+}
+
+/* The Wall */
+.fw-wall {
+    position: absolute;
+    left: 50%;
+    top: 0;
+    bottom: 0;
+    width: 6px;
+    transform: translateX(-50%);
+    background: linear-gradient(180deg, var(--accent-blue), var(--accent-green));
+    border-radius: 3px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 5;
+}
+
+.fw-wall-text {
+    position: absolute;
+    top: -22px;
+    white-space: nowrap;
+    font-size: 0.6rem;
+    font-weight: 700;
+    color: var(--accent-blue);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.fw-wall-glow {
+    position: absolute;
+    inset: -8px;
+    background: radial-gradient(ellipse, rgba(0, 180, 216, 0.15), transparent 70%);
+    pointer-events: none;
+}
+
+/* === TERMINAL === */
+.fw-terminal {
+    background: #0b0e17;
+    border: 1px solid #1a2332;
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+}
+
+.fw-terminal-header {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 12px;
+    background: #111827;
+    border-bottom: 1px solid #1a2332;
+}
+
+.fw-terminal-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+}
+
+.fw-dot-red {
+    background: #ff5f57;
+}
+
+.fw-dot-yellow {
+    background: #febc2e;
+}
+
+.fw-dot-green {
+    background: #28c840;
+}
+
+.fw-terminal-title {
+    margin-left: 8px;
+    color: #4a5568;
+    font-size: 0.65rem;
+}
+
+.fw-terminal-body {
+    padding: 12px 14px;
+    max-height: 200px;
+    overflow-y: auto;
+    line-height: 1.7;
+}
+
+.fw-log-line {
+    color: #8892b0;
+}
+
+.fw-log-command {
+    color: var(--accent-green);
+}
+
+.fw-log-header {
+    color: var(--accent-blue);
+    font-weight: 700;
+}
+
+.fw-log-allow {
+    color: #00ff88;
+}
+
+.fw-log-deny {
+    color: #ff4757;
+}
+
+.fw-cursor {
+    color: var(--accent-green);
+    animation: fwBlink 1s step-start infinite;
+}
+
+@keyframes fwBlink {
+    50% {
+        opacity: 0;
+    }
+}
+
+/* === CONTROLS === */
+.fw-controls {
+    display: flex;
+    justify-content: center;
+    padding: 8px 0;
+}
+
+.fw-btn {
+    padding: 12px 28px;
+    border: none;
+    border-radius: var(--radius-sm);
+    font-weight: 700;
+    font-size: 0.88rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.fw-btn-start {
+    background: linear-gradient(135deg, var(--accent-blue), var(--accent-green));
+    color: #0b0e17;
+}
+
+.fw-btn-start:hover {
+    box-shadow: 0 0 20px rgba(0, 180, 216, 0.4);
+}
+
+.fw-btn-reset {
+    background: transparent;
+    border: 1px solid var(--border-color);
+    color: var(--text-secondary);
+    font-size: 0.82rem;
+}
+
+.fw-btn-reset:hover {
+    border-color: var(--accent-blue);
+    color: var(--accent-blue);
+}
+
+.fw-running-indicator {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.82rem;
+    color: var(--text-secondary);
+    font-family: var(--font-mono);
+}
+
+.fw-pulse {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--accent-blue);
+    animation: fwPulseAnim 1.5s ease infinite;
+}
+
+@keyframes fwPulseAnim {
+
+    0%,
+    100% {
+        opacity: 0.3;
+        transform: scale(0.8);
+    }
+
+    50% {
+        opacity: 1;
+        transform: scale(1.2);
+    }
+}
+
+.fw-done-controls {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+}
+
+.fw-results-summary {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    justify-content: center;
+    font-size: 0.82rem;
+    font-weight: 600;
+}
+
+.fw-result-allowed {
+    color: var(--accent-green);
+}
+
+.fw-result-blocked {
+    color: #ff4757;
+}
+
+.fw-result-attacks {
+    color: var(--accent-blue);
+}
+
+.fw-result-warning {
+    color: #feca57;
+}
+
+/* === RESPONSIVE === */
+@media (max-width: 640px) {
+    .fw-wall-container {
+        flex-direction: column;
+        height: auto;
+    }
+
+    .fw-wall-scene {
+        height: 100px;
+    }
+
+    .fw-rules-grid {
+        gap: 4px;
+    }
+
+    .fw-rule {
+        padding: 8px 10px;
+    }
+}

@@ -44,6 +44,20 @@ export default function Navbar() {
                         Home
                     </Link>
 
+                    <Link
+                        to="/threat-map"
+                        className={`${styles.navLink} ${location.pathname === '/threat-map' ? styles.navLinkActive : ''}`}
+                    >
+                        🌍 Threat Map
+                    </Link>
+
+                    <Link
+                        to="/about"
+                        className={`${styles.navLink} ${location.pathname === '/about' ? styles.navLinkActive : ''}`}
+                    >
+                        👤 About
+                    </Link>
+
                     {/* Lessons Dropdown */}
                     <div className={styles.dropdown} ref={menuRef}>
                         <button

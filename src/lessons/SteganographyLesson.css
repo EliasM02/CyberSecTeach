@@ -1,0 +1,384 @@
+/* ════════════════════════════════
+   Steganography Lesson
+   ════════════════════════════════ */
+
+.steg-scene {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+/* === Image Card === */
+.steg-image-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+}
+
+.steg-image-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 14px;
+    background: rgba(0, 0, 0, 0.3);
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--text-primary);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.steg-image-size {
+    font-size: 0.62rem;
+    color: var(--text-muted);
+}
+
+/* === Pixel Grid === */
+.steg-pixel-grid {
+    display: grid;
+    gap: 1px;
+    padding: 16px;
+    background: #111;
+}
+
+.steg-pixel {
+    aspect-ratio: 1;
+    border-radius: 2px;
+    cursor: pointer;
+    transition: all 0.15s;
+    border: 1px solid transparent;
+}
+
+.steg-pixel:hover {
+    border-color: rgba(255, 255, 255, 0.5);
+}
+
+.steg-pixel-selected-row {
+    border-color: rgba(0, 255, 136, 0.5);
+    box-shadow: 0 0 4px rgba(0, 255, 136, 0.3);
+}
+
+.steg-pixel-inspected {
+    border-color: #feca57 !important;
+    box-shadow: 0 0 8px rgba(254, 202, 87, 0.6) !important;
+    transform: scale(1.3);
+    z-index: 10;
+}
+
+/* === Row Buttons === */
+.steg-row-labels {
+    display: flex;
+    gap: 4px;
+    padding: 10px 14px;
+    overflow-x: auto;
+    border-top: 1px solid var(--border-color);
+}
+
+.steg-row-btn {
+    flex-shrink: 0;
+    padding: 4px 10px;
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    background: var(--bg-card);
+    color: var(--text-muted);
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.steg-row-btn:hover:not(:disabled) {
+    border-color: var(--accent-green);
+    color: var(--accent-green);
+}
+
+.steg-row-btn:disabled {
+    opacity: 0.4;
+    cursor: default;
+}
+
+.steg-row-btn-active {
+    background: rgba(0, 255, 136, 0.1);
+    border-color: var(--accent-green);
+    color: var(--accent-green);
+}
+
+.steg-row-btn-found {
+    background: rgba(255, 71, 87, 0.15) !important;
+    border-color: #ff4757 !important;
+    color: #ff4757 !important;
+    animation: stegPulse 1s ease-in-out infinite;
+}
+
+@keyframes stegPulse {
+
+    0%,
+    100% {
+        box-shadow: 0 0 0 0 rgba(255, 71, 87, 0.4);
+    }
+
+    50% {
+        box-shadow: 0 0 8px 2px rgba(255, 71, 87, 0.6);
+    }
+}
+
+/* === Tools === */
+.steg-tools {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.steg-tool-bar {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.steg-hint {
+    font-size: 0.65rem;
+    color: var(--text-muted);
+    font-style: italic;
+}
+
+.steg-toggle {
+    padding: 6px 14px;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    background: var(--bg-card);
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.steg-toggle:hover {
+    border-color: var(--accent-green);
+}
+
+.steg-toggle-on {
+    background: rgba(0, 255, 136, 0.12);
+    border-color: var(--accent-green);
+    color: var(--accent-green);
+    font-weight: 700;
+}
+
+/* === Pixel Inspector === */
+.steg-inspector {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    padding: 14px;
+}
+
+.steg-inspector-header {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 10px;
+}
+
+.steg-inspector-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.steg-channel {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    padding: 8px;
+    border-radius: 6px;
+}
+
+.steg-channel-r {
+    background: rgba(255, 71, 87, 0.08);
+    border: 1px solid rgba(255, 71, 87, 0.2);
+}
+
+.steg-channel-g {
+    background: rgba(0, 255, 136, 0.08);
+    border: 1px solid rgba(0, 255, 136, 0.2);
+}
+
+.steg-channel-b {
+    background: rgba(84, 160, 255, 0.08);
+    border: 1px solid rgba(84, 160, 255, 0.2);
+}
+
+.steg-channel-label {
+    font-weight: 800;
+    font-size: 0.65rem;
+    color: var(--text-muted);
+}
+
+.steg-channel-val {
+    font-family: var(--font-mono);
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+.steg-channel-bin {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: var(--text-secondary);
+}
+
+.steg-lsb-highlight {
+    color: #feca57;
+    font-weight: 800;
+    background: rgba(254, 202, 87, 0.15);
+    padding: 0 3px;
+    border-radius: 2px;
+}
+
+.steg-inspector-note {
+    font-size: 0.65rem;
+    color: var(--text-muted);
+    text-align: center;
+}
+
+/* === Extraction === */
+.steg-extract {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    padding: 14px;
+}
+
+.steg-extract-found {
+    border-color: #ff4757;
+    background: rgba(255, 71, 87, 0.05);
+}
+
+.steg-extract-header {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 8px;
+}
+
+.steg-decoded-header {
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: var(--text-secondary);
+    margin: 10px 0 4px;
+}
+
+.steg-bits {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    color: var(--text-muted);
+    word-break: break-all;
+    background: rgba(0, 0, 0, 0.2);
+    padding: 8px 10px;
+    border-radius: 4px;
+}
+
+.steg-decoded {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 1rem;
+    color: var(--accent-green);
+    padding: 8px 10px;
+    background: rgba(0, 255, 136, 0.05);
+    border-radius: 4px;
+    border: 1px solid rgba(0, 255, 136, 0.1);
+}
+
+.steg-decoded-flag {
+    color: #ff4757;
+    background: rgba(255, 71, 87, 0.1);
+    border-color: #ff4757;
+    font-weight: 800;
+    font-size: 1.2rem;
+}
+
+.steg-flag-found {
+    text-align: center;
+    font-size: 1.2rem;
+    font-weight: 800;
+    color: #ff4757;
+    margin-top: 12px;
+    text-shadow: 0 0 15px rgba(255, 71, 87, 0.5);
+}
+
+/* === Buttons === */
+.steg-btn {
+    padding: 10px 24px;
+    border-radius: var(--radius-sm);
+    font-weight: 700;
+    font-size: 0.85rem;
+    cursor: pointer;
+    border: none;
+    transition: all 0.2s;
+}
+
+.steg-btn-start {
+    background: var(--accent-green);
+    color: #0a0f1a;
+}
+
+.steg-btn-reset {
+    background: transparent;
+    border: 1px solid var(--border-color);
+    color: var(--text-secondary);
+}
+
+.steg-btn-reset:hover {
+    border-color: var(--accent-green);
+    color: var(--accent-green);
+}
+
+/* === Defense Section === */
+.steg-defense-title {
+    font-size: 1rem;
+    color: var(--text-primary);
+    margin-bottom: 14px;
+}
+
+.steg-defense-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 12px;
+    margin-bottom: 16px;
+}
+
+.steg-defense-card {
+    background: rgba(0, 0, 0, 0.2);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    padding: 12px;
+}
+
+.steg-defense-label {
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: var(--accent-green);
+    margin-bottom: 6px;
+}
+
+.steg-defense-code {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    color: var(--text-primary);
+    background: rgba(0, 0, 0, 0.3);
+    padding: 4px 8px;
+    border-radius: 3px;
+    margin-bottom: 6px;
+}
+
+.steg-defense-card p {
+    font-size: 0.65rem;
+    color: var(--text-muted);
+    margin: 0;
+    line-height: 1.5;
+}

@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
+import { useProgress } from '../context/ProgressContext'
 import styles from './LessonCard.module.css'
 
 const colorMap = {
@@ -27,6 +28,8 @@ const colorMap = {
 
 export default function LessonCard({ to, icon, title, description, difficulty, tags, color = 'green', index = 0 }) {
     const diffClass = difficulty === 'Easy' ? styles.easy : difficulty === 'Medium' ? styles.medium : styles.hard
+    const { isCompleted } = useProgress()
+    const done = isCompleted(to)
 
     return (
         <motion.div
@@ -34,7 +37,8 @@ export default function LessonCard({ to, icon, title, description, difficulty, t
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: index * 0.15 }}
         >
-            <Link to={to} className={styles.card} style={colorMap[color]}>
+            <Link to={to} className={`${styles.card} ${done ? styles.cardDone : ''}`} style={colorMap[color]}>
+                {done && <span className={styles.doneBadge}>✅</span>}
                 <div className={styles.iconRow}>
                     <div className={styles.icon}>{icon}</div>
                     <span className={`${styles.difficulty} ${diffClass}`}>{difficulty}</span>
@@ -51,3 +55,4 @@ export default function LessonCard({ to, icon, title, description, difficulty, t
         </motion.div>
     )
 }
+
