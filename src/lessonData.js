@@ -1,4 +1,5 @@
 // Central lesson registry — single source of truth for Home page + Navbar
+// Last updated: 2026-02-17
 // Categories: reconnaissance, attacks, social-engineering  (+ 'defense' reserved for future)
 
 const lessons = [
