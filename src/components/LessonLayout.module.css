@@ -1,0 +1,85 @@
+.layout {
+    min-height: 100vh;
+    padding-top: 80px;
+}
+
+.header {
+    padding: 48px 0 32px;
+    text-align: center;
+}
+
+.backLink {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin-bottom: 24px;
+    padding: 6px 14px;
+    border-radius: var(--radius-sm);
+    transition: var(--transition-fast);
+}
+
+.backLink:hover {
+    color: var(--accent-green);
+    background: var(--accent-green-dim);
+}
+
+.title {
+    font-size: 2.5rem;
+    font-weight: 800;
+    margin-bottom: 8px;
+    background: linear-gradient(135deg, var(--text-primary), var(--accent-green));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.subtitle {
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px 80px;
+}
+
+.lessonArea {
+    display: grid;
+    grid-template-columns: 1fr 360px;
+    gap: 32px;
+    align-items: start;
+}
+
+.animationPanel {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    padding: 32px;
+    min-height: 500px;
+    position: relative;
+    overflow: hidden;
+}
+
+.sidePanel {
+    position: sticky;
+    top: 100px;
+}
+
+@media (max-width: 900px) {
+    .lessonArea {
+        grid-template-columns: 1fr;
+    }
+
+    .sidePanel {
+        position: static;
+    }
+
+    .title {
+        font-size: 1.8rem;
+    }
+}

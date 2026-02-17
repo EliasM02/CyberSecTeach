@@ -1,0 +1,3 @@
+Jag vill bygga en hemsida som lär folk cybersäkerhet fast utan allt det tekniska.  
+
+Som exempel vill jag ha att man kan trycka på Nmap som attack och så utspelar sig vad som händer. T.ex. ett hus är en server/host och en nmap-scan är någon/något som går runt huset för att hitta dörrar och rycker i alla dörrar för att se vilka som finns och vilka som är öppna. Jag skulle vilja visa detta med animationer och lite förklaringar för någon som kanske inte har allt det tekniska inom IT/cybersäkerhet. Sedan vill jag göra detta med flera verktyg och risker framöver. En cool hemsida som kan demonstrera detta på något vettigt sätt.  
